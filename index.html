@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Writer Vault</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="title">Writer Vault</div>
+      <div class="subtitle">Escribe • Cuenta palabras • Organiza historias</div>
+    </div>
+
+    <div class="stats">
+      <span class="pill" id="pillTotal">Total: 0</span>
+      <span class="pill" id="pillToday">Hoy: 0</span>
+      <span class="pill" id="pillStreak">Racha: 0</span>
+      <span class="pill" id="pillGoal">Meta: 250</span>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="btnNewStory">+ Historia</button>
+      <button class="btn" id="btnExport">Exportar</button>
+      <label class="btn" for="fileImport" style="cursor:pointer;">Importar</label>
+      <input id="fileImport" type="file" accept="application/json" hidden/>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panelTitle">Tus historias</div>
+        <div id="storyList" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panelTitle">Motivación & recordatorio</div>
+
+        <div class="row">
+          <label class="label">Meta diaria (palabras)</label>
+          <input id="goalInput" type="number" min="10" step="10" value="250"/>
+        </div>
+
+        <div class="row">
+          <label class="label">Hora “modo escribir”</label>
+          <input id="reminderTime" type="time" value="22:30"/>
+        </div>
+
+        <div class="row">
+          <button class="btn wide" id="btnTestReminder">Probar recordatorio</button>
+        </div>
+
+        <div class="card note" id="reminderBox">
+          <div class="noteTitle">Tu mini-mensaje</div>
+          <div class="noteText" id="reminderText">
+            “5 minutitos, aunque sea 80 palabras. Cuenta igual 💅”
+          </div>
+        </div>
+
+        <div class="muted">
+          Tip: deja esta página en tu pantalla de inicio (Share → Add to Home Screen) para que sea “app”.
+        </div>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div id="emptyState" class="empty">
+        Crea una historia o selecciona una de la lista ✍️
+      </div>
+
+      <div id="editor" class="editor" style="display:none;">
+        <div class="editorHeader">
+          <input id="storyTitle" class="titleInput" placeholder="Título de la historia"/>
+          <div class="editorMeta">
+            <span class="pill" id="storyWords">Palabras: 0</span>
+            <span class="pill" id="storyUpdated">Última edición: —</span>
+            <button class="btn danger" id="btnDeleteStory">Eliminar</button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" id="tabWrite">Texto</button>
+          <button class="tab" id="tabChars">Personajes</button>
+          <button class="tab" id="tabTimeline">Línea de tiempo</button>
+        </div>
+
+        <!-- WRITE -->
+        <div id="panelWrite" class="panelBody">
+          <textarea id="storyText" class="textarea" placeholder="Escribe aquí… (se guarda solo)"></textarea>
+          <div class="muted" id="goalHint"></div>
+        </div>
+
+        <!-- CHARACTERS -->
+        <div id="panelChars" class="panelBody" style="display:none;">
+          <div class="row inline">
+            <input id="charName" placeholder="Nombre del personaje"/>
+            <button class="btn" id="btnAddChar">Agregar</button>
+          </div>
+          <div id="charList" class="list"></div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div id="panelTimeline" class="panelBody" style="display:none;">
+          <div class="row">
+            <label class="label">Momento (ej: Cap 3 / 2026-05 / “antes del clímax”)</label>
+            <input id="eventWhen" placeholder="Momento"/>
+          </div>
+          <div class="row inline">
+            <input id="eventTitle" placeholder="Evento"/>
+            <button class="btn" id="btnAddEvent">Agregar</button>
+          </div>
+          <div id="eventList" class="list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" style="display:none;"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
