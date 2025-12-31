@@ -88,9 +88,26 @@
 
         <!-- WRITE -->
         <div id="panelWrite" class="panelBody">
-          <textarea id="storyText" class="textarea" placeholder="Escribe aquí… (se guarda solo)"></textarea>
-          <div class="muted" id="goalHint"></div>
-        </div>
+
+  <div class="row inline">
+    <select id="chapterSelect"></select>
+    <button class="btn" id="btnNewChapter">+ Capítulo</button>
+  </div>
+
+  <div class="row">
+    <label class="label">Título del capítulo</label>
+    <input id="chapterTitle" placeholder="Ej: Capítulo 1 — El encuentro" />
+  </div>
+
+  <div class="row inline">
+    <span class="pill" id="chapterWords">Capítulo: 0</span>
+    <button class="btn danger" id="btnDeleteChapter">Eliminar capítulo</button>
+  </div>
+
+  <textarea id="storyText" class="textarea" placeholder="Escribe aquí… (se guarda solo)"></textarea>
+
+  <div class="muted" id="goalHint"></div>
+</div>
 
         <!-- CHARACTERS -->
         <div id="panelChars" class="panelBody" style="display:none;">
